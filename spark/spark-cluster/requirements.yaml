@@ -1,0 +1,24 @@
+dependencies:
+
+- name: livy
+  version: "2.0.*"
+  # repository: "https://jahstreet.github.io/helm-charts"
+  repository: "file://../livy"
+  condition: livy.enabled,global.livy.enabled
+  tags:
+  - livy
+
+- name: spark-history-server
+  version: "1.4.3"
+  # repository: "file://charts/spark-history-server"
+  condition: historyserver.enabled,global.historyserver.enabled
+  tags:
+  - historyserver
+  alias: historyserver
+
+- name: jupyterhub
+  version: "0.9.*"
+  repository: "https://jupyterhub.github.io/helm-chart"
+  condition: jupyterhub.enabled,global.jupyterhub.enabled
+  tags:
+  - jupyterhub
