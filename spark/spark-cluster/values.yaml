@@ -17,7 +17,9 @@ livy:
 
   service:
     name: livy-server
-  
+  load_balancer:
+    enabled: false
+    name:
   ingress:
     enabled: false
     # annotations: {}

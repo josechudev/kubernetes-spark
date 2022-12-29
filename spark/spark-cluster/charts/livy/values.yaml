@@ -174,3 +174,8 @@ sparkDefaultsConf: {}
 livyClientConf: {}
 # fromConfigMap: "livy-client-conf-config-map"
 # fromSecret: "livy-client-conf-secret"
+
+load_balancer:
+  enabled: false
+  name:
+  port: 80

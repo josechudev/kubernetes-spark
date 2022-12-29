@@ -7,3 +7,14 @@ livy:
     port: 80
   env:
     LIVY_LIVY_IMPERSONATION_ENABLED: {value: "true"}
+
+  ingress:
+    enabled: false
+  path: /livy/?(.*)
+  hosts:
+    - livy.local
+
+  load_balancer:
+    enabled: true
+    name:
+    port: 80

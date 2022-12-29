@@ -1,0 +1,21 @@
+{{- if .Values.load_balancer.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ default (include "livy.fullname" .) .Values.load_balancer.name }}
+  labels:
+      app.kubernetes.io/name: {{ include "livy.name" . }}
+      helm.sh/chart: {{ include "livy.chart" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: LoadBalancer
+  ports:
+  - port: {{ .Values.load_balancer.port }}
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: {{ include "livy.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
