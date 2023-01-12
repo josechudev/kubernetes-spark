@@ -179,3 +179,29 @@ load_balancer:
   enabled: false
   name:
   port: 80
+
+ingress-auth:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    #
+    # External auth with OAuth2: https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/#external-oauth-authentication
+    # nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    #
+    # Basic auth
+    # nginx.ingress.kubernetes.io/auth-type: basic
+    # nginx.ingress.kubernetes.io/auth-secret: secret-namespace/auth-secret
+    # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+    #
+    # Rewrite target URI without basePath part: https://kubernetes.github.io/ingress-nginx/examples/rewrite/#rewrite
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+  path: /
+  # path: /livy/?(.*) # Capture target URI part to remove basePath on `rewrite-target` above
+  hosts:
+  - livy.local # Set to endpoint hostname to accept requests to
+  tls: [] # Configure tls, Certmanager will do the work with Certs for you if properly configured
+  # - secretName: livy-tls
+  #   hosts:
+  #   - livy.local

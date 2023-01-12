@@ -9,12 +9,19 @@ livy:
     LIVY_LIVY_IMPERSONATION_ENABLED: {value: "true"}
 
   ingress:
-    enabled: false
-  path: /livy/?(.*)
-  hosts:
-    - livy.local
+    enabled: true
+    path: /
+    hosts:
+      - 144.126.248.21.nip.io
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: basic-auth
+      nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+      
+
 
   load_balancer:
-    enabled: true
+    enabled: false
     name:
     port: 80
