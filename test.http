@@ -1,3 +1,5 @@
 
 
-curl  -X POST --data '{"kind": "spark", "proxyUser": "test"}' -H "Content-Type: application/json" "http://159.203.144.132.nip.io/sessions"
+curl  -X POST --data '{"kind": "spark", "proxyUser": "test"}' -H "Content-Type: application/json" "http://159.203.144.132.nip.io/sessions/"
+
+curl  -X GET  -H "Content-Type: application/json" "http://159.203.144.132.nip.io/sessions"
