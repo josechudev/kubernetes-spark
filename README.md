@@ -17,3 +17,8 @@ helm upgrade keycloak ./keycloak --create-namespace --namespace keycloak --value
  apk add --update coreutils
  echo $(kubectl get secret --namespace keycloak  keycloak -o jsonpath="{.data.admin-password}" | base64 -d)
 ```
+```
+helm upgrade spark-operator ./spark-operator --create-namespace --namespace spark-operator --values values.yaml --install --atomic  --wait --timeout 300s --cleanup-on-fail --dry-run
+ apk add --update coreutils
+ echo $(kubectl get secret --namespace keycloak  keycloak -o jsonpath="{.data.admin-password}" | base64 -d)
+```

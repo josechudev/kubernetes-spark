@@ -8,5 +8,8 @@ dependencies:
 - name: jupyterhub
   repository: https://jupyterhub.github.io/helm-chart
   version: 0.9.1
+- name: ingress-nginx
+  repository: file://../ingress-nginx
+  version: 2.0.1
 digest: sha256:9b73a12e4181e978d3ffc7d20fc84a2c19cdaebf1e9e8ed7f2b8949cc5901149
 generated: "2020-12-19T10:42:21.020929+03:00"
