@@ -19,10 +19,10 @@ livy:
       # nginx.ingress.kubernetes.io/auth-secret: basic-auth
       # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
       nginx.ingress.kubernetes.io/rewrite-target: /
-      nginx.ingress.kubernetes.io/server-snippet: |
-        location = /sessions {
-          limit_except POST { deny  all; }
-        }
+      # nginx.ingress.kubernetes.io/server-snippet: |
+      #   location = /sessions {
+      #     limit_except POST { deny  all; }
+      #   }
 
   load_balancer:
     enabled: false

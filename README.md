@@ -11,14 +11,3 @@ alias k=kubectl
 k config set-context --current --namespace=livy
 k port-forward service/livy-server 3030:80 --address 10.245.39.68,localhost
 ```
-
-```
-helm upgrade keycloak ./keycloak --create-namespace --namespace keycloak --values values.yaml --install --atomic  --wait --timeout 300s --cleanup-on-fail --dry-run
- apk add --update coreutils
- echo $(kubectl get secret --namespace keycloak  keycloak -o jsonpath="{.data.admin-password}" | base64 -d)
-```
-```
-helm upgrade spark-operator ./spark-operator --create-namespace --namespace spark-operator --values values.yaml --install --atomic  --wait --timeout 300s --cleanup-on-fail --dry-run
- apk add --update coreutils
- echo $(kubectl get secret --namespace keycloak  keycloak -o jsonpath="{.data.admin-password}" | base64 -d)
-```

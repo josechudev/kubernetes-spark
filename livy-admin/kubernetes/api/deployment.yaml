@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: livy-admin
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: livy-admin
+  template:
+    metadata:
+      labels:
+        app: livy-admin
+    spec:
+      containers:
+      - name: livy-admin
+        image: jchudb93/livy-admin:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: livy-admin-service
+spec:
+  selector:
+    app: livy-admin-deployment
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
