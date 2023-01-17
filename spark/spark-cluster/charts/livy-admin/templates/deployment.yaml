@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "livy-admin.fullname" . }}-livy-admin
+  labels:
+  {{- include "livy-admin.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.livyAdmin.replicas }}
+  selector:
+    matchLabels:
+      app: livy-admin
+    {{- include "livy-admin.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: livy-admin
+      {{- include "livy-admin.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: API_KEY
+          value: {{ .Values.livyAdmin.livyAdmin.image.apiKey | default "55d51bedde21" }}
+        - name: LIVY_SERVER
+          value: {{ .Values.livyAdmin.livyAdmin.image.livyServerDomain | default "http://livy-server.livy.svc.cluster.local"}} 
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ .Values.kubernetesClusterDomain }}
+        image: {{ .Values.livyAdmin.livyAdmin.image.repository }}:{{ .Values.livyAdmin.livyAdmin.image.tag | default .Chart.AppVersion }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
+        name: livy-admin
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources: {{- toYaml .Values.livyAdmin.livyAdmin.resources | nindent 10 }}

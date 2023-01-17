@@ -426,3 +426,26 @@ ingress-nginx:
 
     # -- Optionally customize the pod hostname.
     hostname: {}
+
+livy-admin:
+  kubernetesClusterDomain: cluster.local
+  livyAdmin:
+    livyAdmin:
+      image:
+        repository: jchudb93/livy-admin
+        tag: latest
+      apiKey: 55d51bedde21
+      livyServer: http://livy-server.livy.svc.cluster.local
+      resources:
+        limits:
+          cpu: 500m
+          memory: 128Mi
+    replicas: 1
+  service:
+    ports:
+    - port: 80
+      targetPort: 80
+    type: LoadBalancer
+  ingress:
+    spec:
+      host: hello-world.info

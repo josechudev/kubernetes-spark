@@ -1,5 +1,18 @@
+curl -X 'POST' \
+  'http://174.138.119.239.nip.io/sessions' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "kind": "spark",
+  "proxyUser": "david"
+}'
 
+curl -X 'GET' \
+  'http://174.138.119.239.nip.io/sessions' \
+  -H 'accept: application/json' \
+  -H 'access_token: accesstoken'
 
-curl  -X POST --data '{"kind": "spark", "proxyUser": "test"}' -H "Content-Type: application/json" "http://159.203.144.132.nip.io/sessions/"
-
-curl  -X GET  -H "Content-Type: application/json" "http://159.203.144.132.nip.io/sessions"
+curl -X 'GET' \
+  'http://174.138.119.239.nip.io/sessions/0' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json'

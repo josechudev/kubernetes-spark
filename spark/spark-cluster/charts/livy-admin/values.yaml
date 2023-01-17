@@ -1,0 +1,21 @@
+kubernetesClusterDomain: cluster.local
+livyAdmin:
+  livyAdmin:
+    image:
+      repository: jchudb93/livy-admin
+      tag: latest
+    resources:
+      limits:
+        cpu: 500m
+        memory: 128Mi
+  replicas: 1
+service:
+  ports:
+  - port: 80
+    targetPort: 80
+  type: NodePort
+ingress:
+  spec:
+    host: hello-world.info
+  annotations:
+    kubernetes.io/ingress.class: nginx

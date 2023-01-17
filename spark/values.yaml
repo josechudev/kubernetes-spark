@@ -8,22 +8,6 @@ livy:
   env:
     LIVY_LIVY_IMPERSONATION_ENABLED: {value: "true"}
       
-  ingress:
-    enabled: true
-    path: /
-    hosts:
-      - 159.203.144.132.nip.io
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      # nginx.ingress.kubernetes.io/auth-type: basic
-      # nginx.ingress.kubernetes.io/auth-secret: basic-auth
-      # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
-      nginx.ingress.kubernetes.io/rewrite-target: /
-      # nginx.ingress.kubernetes.io/server-snippet: |
-      #   location = /sessions {
-      #     limit_except POST { deny  all; }
-      #   }
-
   load_balancer:
     enabled: false
     name:
@@ -32,3 +16,29 @@ livy:
 ingress-nginx:
   controller:
     config: {}
+
+livy-admin:
+  kubernetesClusterDomain: cluster.local
+  livyAdmin:
+    livyAdmin:
+      image:
+        repository: jchudb93/livy-admin
+        tag: latest
+      apiKey: 55d51bedde21
+      livyServer: http://livy-server.livy.svc.cluster.local
+      resources:
+        limits:
+          cpu: 500m
+          memory: 128Mi
+    replicas: 1
+  service:
+    ports:
+    - port: 80
+      targetPort: 80
+    type: NodePort
+  ingress:
+    spec:
+      host: 174.138.119.239.nip.io
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      
