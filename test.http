@@ -1,10 +1,11 @@
 curl -X 'POST' \
-  'http://174.138.119.239.nip.io/sessions' \
+  'http://167.99.21.118.nip.io/sessions' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
   "kind": "spark",
-  "proxyUser": "david"
+  "proxyUser": "david",
+  "driverMemory": "10M"
 }'
 
 curl -X 'GET' \
@@ -13,6 +14,6 @@ curl -X 'GET' \
   -H 'access_token: accesstoken'
 
 curl -X 'GET' \
-  'http://174.138.119.239.nip.io/sessions/0' \
+  'http://167.99.21.118.nip.io/sessions/5' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json'

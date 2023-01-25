@@ -12,7 +12,7 @@ rules:
 - apiGroups: [""]
   resources: ["pods", "pods/log"]
   verbs: ["*"]
-- apiGroups: ["", "extensions"]
+- apiGroups: ["", "extensions", "networking.k8s.io"]
   resources: ["configmaps", "services", "ingresses"]
   verbs: ["create", "update", "get", "list"]
 - apiGroups: [""]
